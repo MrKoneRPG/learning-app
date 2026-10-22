@@ -1,5 +1,5 @@
 import LearningEntry from "./components/LearningEntry";
-
+import './App.css'
 
 function App() {
   const studentName: string = "Atte Huotari";
