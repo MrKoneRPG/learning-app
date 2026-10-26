@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LearningEntry from "./components/LearningEntry";
 import type { LearningEntryData } from "./types/LearningEntryData";
-
+import './App.css';
 
 function App() {
   const studentName: string = "Atte Huotari";
