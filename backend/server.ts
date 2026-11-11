@@ -26,7 +26,7 @@ app.get("/api/entries", async (_req, res) => {
           entry_date AS date,
           learned,
           confidence,
-          coffein,
+          coffein
        FROM e2501231learning_entries
        ORDER BY id`
     );
@@ -50,7 +50,7 @@ app.post("/api/entries", async (req, res) => {
     date,
     learned,
     confidence,
-    coffein,
+    coffein
   } = req.body;
 
   if (
@@ -74,7 +74,7 @@ app.post("/api/entries", async (req, res) => {
   try {
     const [result] = await pool.execute<ResultSetHeader>(
       `INSERT INTO e2501231learning_entries
-       (topic, entry_date, learned, confidence, category)
+       (topic, entry_date, learned, confidence, coffein)
        VALUES (?, ?, ?, ?, ?)`,
       [
         topic.trim(),
