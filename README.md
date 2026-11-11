@@ -30,3 +30,23 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+Application Structure
+
+Sivut:
+
+HomePage
+EntriesPage
+
+Tehtynä myös componenti LearningEntry oppimispäiväkirjan merkintöjen nääyttämiseen
+
+React hoitaa frontin
+Express hoitaa backin 
+MariaDb hoitaa tietokannan
+
+Reitit
+
+Reitti/entries on reactin frontti-reitti, joka näyttää Entries sivut
+
+Reitti GET /api/entries on Express backendin reitti hakea merkinnät mariadb tietokannasta
+
