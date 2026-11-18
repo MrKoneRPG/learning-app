@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useLearningStore } from "../store/userLearningStore";
 import LearningEntry from "../components/LearningEntry";
-import type { LearningEntryData } from "../types/LearningEntryData";
+import { loadEntries } from "../api/entries";
+
 
 export default function EntriesPage() {
-  const [serverEntries, setServerEntries] = useState<LearningEntryData[]>([]);
+  const serverEntries = useLearningStore((state) => state.entries);
+  
+
   const [loadError, setLoadError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -13,26 +17,7 @@ export default function EntriesPage() {
   const [confidence, setConfidence] = useState(1);
   const [coffein, setCoffein] = useState("");
 
-  async function loadServerEntries() {
-    setLoadError("");
 
-    try {
-      const response = await fetch("http://localhost:3001/api/entries");
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      const data: LearningEntryData[] =
-        await response.json();
-
-      setServerEntries(data);
-    } catch {
-      setLoadError(
-        "Could not connect to backend."
-      );
-    }
-  }
   
   async function handleAddEntry() {
     setMessage("");
@@ -71,7 +56,7 @@ export default function EntriesPage() {
         throw new Error();
       }
 
-      await loadServerEntries();
+      await loadEntries();
 
       setMessage("Entry saved.");
 
@@ -87,8 +72,17 @@ export default function EntriesPage() {
   }
 
   useEffect(() => {
-    loadServerEntries();
-  }, []);
+  async function fetchData() {
+    try {
+      await loadEntries();
+    } catch {
+      setLoadError("Could not connect to backend.");
+    }
+  }
+
+  fetchData();
+}, []);
+
 
   return (
     <main>
